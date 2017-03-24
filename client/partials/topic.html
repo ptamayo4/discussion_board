@@ -1,0 +1,28 @@
+<div style="margin: 0 auto;width:95%;">
+    <h2><a href="#!/user/{{post._user._id}}">{{post._user.name}}</a> posted a topic: </h2>
+    <div style="margin-left:30px;">
+        <h3>{{post.title}}</h3>
+        <p>Description: {{post.description}}</p>
+    </div>
+    <h2>Post your answer here:</h2>
+    <form style="border-bottom:3px solid black;">
+        <textarea style="margin-left:30px;" rows="4" cols="80" ng-model="newResponse.text"></textarea>
+        <p><button style="margin-left:30px;" ng-click="addResponse(newResponse)">Submit</button></p>
+    </form>
+    <div style="margin-left:30px;" ng-repeat="response in post.responses | orderBy: '-createdAt'">
+        <p style="display:inline-block;"><a href="#!/user/{{response._user._id}}">{{response._user.name}}</a>: {{response.text}}</p>
+        <div style="display:inline-block;" ng-click="upVote(response._id)">
+            <input type="image" src="assets/icons/fire.png" style="width:40px;display:inline-block;margin:0 auto;">
+            <h2 style="display:inline-block;position:absolute;margin: -31px -3px -9px 40px;text-align:center;">{{response.upvotes}}</h2>
+        </div>
+        <div style="display:inline-block;" ng-click="downVote(response._id)">
+            <input type="image" src="assets/icons/poop.png" style="width:40px;display:inline-block;margin:5px 10px 0px 30px;">
+            <h2 style="display:inline-block;position:absolute;margin: -31px 0px -9px 73px;">{{response.downvotes}}</h2>
+        </div>
+        <p style="margin-left:30px;" ng-repeat="comment in response.comments"><a href="#!/user/{{comment._user._id}}">{{comment._user.name}}</a>: {{comment.text}}</p>
+        <form style="border-bottom:3px solid black;">
+            <textarea rows="4" cols="80" ng-model="newComment.text"></textarea>
+            <p><button ng-click="addComment(newComment, response._id)">Comment</button></p>
+        </form>
+    </div>
+</div>

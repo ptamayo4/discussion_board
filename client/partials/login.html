@@ -1,0 +1,15 @@
+<h2>Register</h2>
+<form name="myForm">
+    <input type="text" name="name" ng-model="newUser.name" ng-minlength=2 ng-maxlength=10 required>
+    <button ng-disabled="myForm.$invalid" ng-click="register(newUser)">Submit</button>
+    <div ng-messages="myForm.name.$error" style="color:red" role="alert">
+        <div ng-message="required">Enter a name</div>
+        <div ng-message="minlength">Your name is too short</div>
+        <div ng-message="maxlength">Your name is too long</div>
+    </div>
+</form>
+<h2>Login</h2>
+<form>
+    <input type="text" ng-model="user.name">
+    <button ng-click="login(user)">Login</button>
+</form>

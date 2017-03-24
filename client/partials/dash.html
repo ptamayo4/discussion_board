@@ -1,0 +1,37 @@
+<h2>Welcome {{user.name}}</h2>
+<!-- Search BOX!!! -->
+<table style="width: 80%; border:1px solid black;margin: 0 auto;text-align:left;">
+    <style media="screen">
+        table {border-collapse: collapse;}
+
+        table, th, td {border: 1px solid black;}
+    </style>
+    <p>Search: <input type="text" ng-model="searchText"></p>
+    <thead>
+        <th>Category</th>
+        <th>Topics</th>
+        <th>User</th>
+        <th>Posts</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="post in posts | filter: searchText | orderBy: '-createdAt'">
+            <td style="border:1px solid black;">{{post.category}}</td>
+            <td><a href="#!/topic/{{post._id}}">{{post.title}}</a></td>
+            <td><a href="#!/user/{{post._user._id}}">{{post._user.name}}</a></td>
+            <td>{{post.responses.length}}</td>
+        </tr>
+    </tbody>
+</table>
+<h3>Add a New Topic</h3>
+<form>
+    <p>Topic <input type="text" ng-model="newPost.title"></p>
+    <p>Description</p><p> <textarea rows="8" cols="80" ng-model="newPost.description"></textarea>
+    <p>Category
+        <select ng-model="newPost.category">
+            <option value="Python">Python</option>
+            <option value="HTML/CSS">HTML/CSS</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="iOS">iOS</option>
+        </select>
+    <button ng-click="addPost(newPost)">Add Topic</button>
+</form>
